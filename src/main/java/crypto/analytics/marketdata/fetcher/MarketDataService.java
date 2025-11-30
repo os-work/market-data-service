@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class MarketDataController {
+public class MarketDataService {
 
     @Value("${app.coinmarketcap.endpoint-crypto-listings}")
     private String endpoint;
@@ -18,7 +18,7 @@ public class MarketDataController {
     private final KafkaTemplate<String, LatestListingResponse> kafka;
 
     @Autowired
-    public MarketDataController(WebClient webClient, KafkaTemplate<String, LatestListingResponse> kafka) {
+    public MarketDataService(WebClient webClient, KafkaTemplate<String, LatestListingResponse> kafka) {
         this.webClient = webClient;
         this.kafka = kafka;
     }
