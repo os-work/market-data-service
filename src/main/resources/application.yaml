@@ -1,16 +1,19 @@
 spring:
   application:
     name: marketdata
+  profiles:
+    active: local
   cloud: # GCP
     gcp:
       project-id: melodic-ranger-479719-m8
   config:
     import: "sm://" # GCP Secret Manager
-  kafka: # Kafka
-    bootstrap-servers: ${sm://KAFKA_BOOTSTRAP_SERVERS_URL}
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+logging:
+  level:
+    root: info
+    org.springframework.web: "debug"
+
 app:
   coinmarketcap:
     api-key: ${sm://COINMARKETCAP_API_KEY}
@@ -19,3 +22,27 @@ app:
     endpoint-crypto-listings: "v1/cryptocurrency/listings/latest"
   marketdata:
     poll-interval-ms: 5000
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "local"
+  kafka: # Kafka
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+  kafka: # Kafka
+    bootstrap-servers: ${sm://KAFKA_BOOTSTRAP_SERVERS_URL}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

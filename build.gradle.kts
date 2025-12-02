@@ -8,6 +8,11 @@ group = "crypto.analytics"
 version = "0.0.1-SNAPSHOT"
 description = "Market Data Service"
 
+configurations.implementation {
+    // Exclude all transitive dependencies
+    exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+}
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
@@ -25,6 +30,8 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka:3.3.11")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2:3.5.8")
+
     implementation("org.springframework.boot:spring-boot-starter-webflux") // WebClient
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
