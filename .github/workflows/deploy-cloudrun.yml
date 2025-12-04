@@ -25,7 +25,7 @@ jobs:
           token_format: 'id_token'
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.GCP_SA }}
-          id_token_audience: 'https://github.com/os-work/${{ SERVICE_NAME }}' # required, value depends on target
+          id_token_audience: 'https://github.com/os-work/${{ env.SERVICE_NAME }}' # required, value depends on target
           id_token_include_email: true
 
       - name: Set up Cloud SDK
@@ -70,7 +70,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          gcloud run deploy ${{ SERVICE_NAME }} \
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
             --image=${IMAGE}:${IMAGE_TAG} \
             --region=${{ secrets.GCP_REGION }} \
             --platform=managed \
