@@ -6,7 +6,7 @@ on:
       - develop
 
 env:
-  IMAGE: "us-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REGISTRY_REPO }}/market-data-service"
+  IMAGE: "europe-central2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REGISTRY_REPO }}/market-data-service"
 
 jobs:
   build-and-deploy:
