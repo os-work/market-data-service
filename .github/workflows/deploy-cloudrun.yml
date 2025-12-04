@@ -21,10 +21,11 @@ jobs:
       - name: Authenticate to Google Cloud (Workload Identity Federation)
         uses: google-github-actions/auth@v3
         with:
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          project_id: ${{ secrets.GCP_PROJECT }}
           token_format: 'id_token'
-          token_audience: https://github.com/os-work/market-data-service
+          workload_identity_provider: "projects/486669970390/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: ${{ secrets.GCP_SA }}
+          id_token_audience: 'https://github.com/os-work/market-data-service' # required, value depends on target
+          id_token_include_email: true
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
