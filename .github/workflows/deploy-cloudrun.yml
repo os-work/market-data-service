@@ -8,12 +8,12 @@ on:
 env:
   IMAGE: "us-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.ARTIFACT_REGISTRY_REPO }}/market-data-service"
 
+permissions:
+  contents: 'read'
+  id-token: 'write'        # needed for Workload Identity Federation (OIDC)
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'        # needed for Workload Identity Federation (OIDC)
     steps:
       - name: Checkout
         uses: actions/checkout@v4
