@@ -74,5 +74,6 @@ jobs:
             --image=${{ env.IMAGE }}:${{ env.IMAGE_TAG }} \
             --region=${{ secrets.GCP_REGION }} \
             --platform=managed \
+            --service-account=${{ secrets.GCP_SA }} \
             --allow-unauthenticated \
             --project=${{ secrets.GCP_PROJECT }}
