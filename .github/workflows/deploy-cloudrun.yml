@@ -23,6 +23,7 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.GCP_SA }}
+          token_format: 'id_token'
           token_audience: https://github.com/os-work/market-data-service
 
       - name: Set up Cloud SDK
