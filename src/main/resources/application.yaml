@@ -2,7 +2,7 @@ spring:
   application:
     name: marketdata
   profiles:
-    active: local
+    active: prod
   cloud: # GCP
     gcp:
       project-id: melodic-ranger-479719-m8
